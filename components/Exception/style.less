@@ -1,0 +1,45 @@
+
+.wrapper {
+  height: 100vh;
+  width: 100%;
+  min-width: 1000px;
+  background: #FFF;
+  display: table;
+  .container {
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    .img {
+      margin: 0 auto;
+      &.bgImg {
+        width: 700px;
+        height: 450px;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        &.img404 {
+          background-image: url(/static/imgs/404.png);
+        }
+        &.img500 {
+          background-image: url(/static/imgs/500.png);
+        }
+      }
+    }
+    .tips {
+      height: 22px;
+      line-height: 22px;
+      font-size: 16px;
+      font-weight: 400;
+      color: #666;
+      text-align: center;
+      .back {
+        color: #1890ff;
+        transition: color 400ms ease; 
+        &:hover {
+          color: #5cabf5;
+        }
+      }
+    }
+  }
+}

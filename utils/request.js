@@ -1,5 +1,4 @@
 import 'isomorphic-unfetch'
-// import hash from 'hash.js';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',

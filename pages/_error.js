@@ -1,5 +1,5 @@
 import React from 'react'
-import ErrorPage from '../components/ErrorPage'
+import ErrorPage from '../components/Exception/ErrorPage'
 export default class Error extends React.Component {
   static defaultProps = {
     statusCode: 200

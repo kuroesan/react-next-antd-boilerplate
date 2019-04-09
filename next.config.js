@@ -14,13 +14,19 @@ const themeVariables = lessToJS(
 
 // fix: prevents error when .css files are required by node
 if (typeof require !== 'undefined') {
-  require.extensions['.less'] = (file) => { }
+  require.extensions['.less'] = () => { }
 }
 
 module.exports = withLess({
   lessLoaderOptions: {
     javascriptEnabled: true,
     modifyVars: themeVariables
+  },
+  exportPathMap: async function () {
+    return {
+      '/': { page: '/' },
+      '/test/linktest': { page: '/test/linktest' }
+    }
   },
   webpack: (config, { dev }) => {
     if (!dev) {
