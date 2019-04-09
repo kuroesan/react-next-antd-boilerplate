@@ -10,7 +10,7 @@ class Index extends React.Component {
     const { test } = this.props.Gobal
     return (
       <div>
-        <p>Welcome to next.js! mobx: {test}</p>
+        <p>Welcome to next.js!!! mobx: {test}</p>
         <Link prefetch href='/test/linktest'>
           <Button type='primary'>test link</Button>
         </Link>

@@ -67,6 +67,7 @@ module.exports = withLess({
       });
       config.devtool = 'cheap-module-inline-source-map';
     }
+    config.node = { fs: 'empty' }
     return config
   },
   webpackDevMiddleware: config => {

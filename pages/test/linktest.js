@@ -1,4 +1,5 @@
 import { Button } from 'antd'
-export default () => <div>
-  <Button>Next Link Test</Button>
+import './test.less'
+export default () => <div className='wrap'>
+  <Button className='test'>Next Link Test</Button>
 </div>
