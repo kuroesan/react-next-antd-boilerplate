@@ -18,6 +18,9 @@ if (typeof require !== 'undefined') {
 }
 
 module.exports = withLess({
+  generateBuildId: async () => {
+    return 'v1'
+  },
   lessLoaderOptions: {
     javascriptEnabled: true,
     modifyVars: themeVariables
@@ -29,6 +32,7 @@ module.exports = withLess({
     }
   },
   webpack: (config, { dev }) => {
+
     if (!dev) {
       config.plugins.push(
         ...[
@@ -74,6 +78,17 @@ module.exports = withLess({
       config.devtool = 'cheap-module-inline-source-map';
     }
     config.node = { fs: 'empty' }
+    const originalEntry = config.entry
+    config.entry = async () => {
+      const entries = await originalEntry()
+      if (
+        entries['main.js'] &&
+        !entries['main.js'].includes('./config/polyfills.js')
+      ) {
+        entries['main.js'].unshift('./config/polyfills.js')
+      }
+      return entries
+    }
     return config
   },
   webpackDevMiddleware: config => {
@@ -82,5 +97,16 @@ module.exports = withLess({
     // Important: return the modified config
     return config;
   },
+  serverRuntimeConfig: { // Will only be available on the server side
+    rootDir: path.join(__dirname, './'),
+    PORT: process.env.NODE_ENV !== 'production' ? 3000 : (process.env.PORT || 5000)
+  },
+  publicRuntimeConfig: { // Will be available on both server and client
+    staticFolder: '/static',
+    isDev: process.env.NODE_ENV !== 'production' // Pass through env variables
+  },
+  env: {
+    SERVER_HOST: 'http://localhost:8080'
+  }
 });
 

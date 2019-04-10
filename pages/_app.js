@@ -7,6 +7,10 @@ import { Provider } from 'mobx-react'
 import Helmet from 'react-helmet'
 import { RouterTitle } from '../config/routerConfig'
 
+process.env.NODE_ENV !== 'production' ?
+  import('../assets/styles_dev.less')
+  : import('../assets/styles_prod.less')
+
 configure({ enforceActions: 'always' })
 
 export default class MyApp extends App {
