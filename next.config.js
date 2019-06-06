@@ -4,6 +4,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TerserPlugin = require('terser-webpack-plugin');
 const fs = require('fs');
 const path = require('path');
+const isDev = process.env.NODE_ENV !== 'production';
 
 const themeVariables = lessToJS(
   fs.readFileSync(
@@ -18,6 +19,7 @@ if (typeof require !== 'undefined') {
 }
 
 module.exports = withLess({
+  // assetPrefix: isDev ? '' : 'https://cdn.mydomain.com',
   generateBuildId: async () => {
     return 'v1'
   },
@@ -99,11 +101,11 @@ module.exports = withLess({
   },
   serverRuntimeConfig: { // Will only be available on the server side
     rootDir: path.join(__dirname, './'),
-    PORT: process.env.NODE_ENV !== 'production' ? 3000 : (process.env.PORT || 5000)
+    PORT: isDev ? 3000 : (process.env.PORT || 5000)
   },
   publicRuntimeConfig: { // Will be available on both server and client
     staticFolder: '/static',
-    isDev: process.env.NODE_ENV !== 'production' // Pass through env variables
+    isDev: isDev // Pass through env variables
   },
   env: {
     SERVER_HOST: 'http://localhost:8080'

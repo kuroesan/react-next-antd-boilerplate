@@ -13,7 +13,7 @@ module.exports = {
         'logs',
         'static'
       ],
-      instances: 2,  // 启动2个实例
+      instances: 1,  // 启动实例数量
       node_args: '--harmony',
       env: {
         NODE_ENV: 'production',
